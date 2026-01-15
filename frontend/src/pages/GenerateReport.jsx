@@ -169,7 +169,7 @@ export default function GenerateReport() {
     setPublicationsView(null);
 
     try {
-      const response = await fetch("http://localhost:8000/analyze/start", {
+      const response = await fetch("/analyze/start", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: link, forceRefresh: forceRefresh }),
@@ -214,7 +214,7 @@ export default function GenerateReport() {
     if (!jobId) return;
     const interval = setInterval(async () => {
       try {
-        const res = await fetch(`http://localhost:8000/analyze/status/${jobId}`);
+        const res = await fetch(`/analyze/status/${jobId}`);
         if (!res.ok) return;
         const data = await res.json();
         if (data.progress) setProgress(data.progress);
